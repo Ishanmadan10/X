@@ -1,0 +1,18 @@
+name: CI-CD
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest ./backend
+    - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest ./frontend
+
+    - run: docker push ${{ secrets.DOCKER_USERNAME }}/backend:latest
+    - run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest

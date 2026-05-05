@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Login</h2>
+<input id="email" placeholder="email"/>
+<input id="password" placeholder="password"/>
+<button onclick="login()">Login</button>
+
+<h2>Products</h2>
+<button onclick="getProducts()">Load</button>
+<ul id="products"></ul>
+
+<script>
+async function login() {
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  });
+  const data = await res.json();
+  localStorage.setItem("token", data.token);
+}
+
+async function getProducts() {
+  const res = await fetch("/api/products");
+  const data = await res.json();
+  products.innerHTML = data.map(p => `<li>${p.name} - ₹${p.price}</li>`).join("");
+}
+</script>
+</body>
+</html>
