@@ -35,12 +35,12 @@ jobs:
 
     # ---------------------------
     # Push images
-    # ---------------------------
-    # - name: Push backend image
-    #   run: docker push ${{ secrets.DOCKER_USERNAME }}/backend:${TAG}
+    ---------------------------
+    - name: Push backend image
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/backend:${TAG}
 
-    # - name: Push frontend image
-    #   run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:${TAG}
+    - name: Push frontend image
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:${TAG}
 
     - name: Inject backend image
       run: |
