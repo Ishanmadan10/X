@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ishanmadan108/backend:latest
+        image: __BACKEND_IMAGE__
         ports:
         - containerPort: 3000
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service

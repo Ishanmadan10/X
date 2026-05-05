@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ishanmadan108/frontend:latest
+        image: __FRONTEND_IMAGE__
         ports:
         - containerPort: 80
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
