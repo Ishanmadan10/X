@@ -35,7 +35,7 @@ jobs:
 
     # ---------------------------
     # Push images
-    ---------------------------
+    #---------------------------
     - name: Push backend image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/backend:${TAG}
 
