@@ -42,9 +42,14 @@ jobs:
     # - name: Push frontend image
     #   run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:${TAG}
 
-    # ---------------------------
-    # Update Kubernetes YAML
-    # ---------------------------
+    - name: Inject backend image
+      run: |
+        sed -i "s|__BACKEND_IMAGE__|${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}|g" k8s/backend.yaml
+
+    - name: Inject frontend image
+      run: |
+        sed -i "s|__FRONTEND_IMAGE__|${{ secrets.DOCKER_USERNAME }}/frontend:${{ github.sha }}|g" k8s/frontend.yaml
+
     - name: Debug - show image tags
       run: |
         echo "Backend image:"
